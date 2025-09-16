@@ -1,0 +1,60 @@
+package javalab;
+
+class Time {
+    private int hours;
+    private int minutes;
+
+    // Constructor
+    public Time(int hours, int minutes) {
+        this.hours = hours;
+        this.minutes = minutes;
+        normalize();
+    }
+
+    // Normalize so that minutes are between 0 and 59
+    private void normalize() {
+        // Handle extra minutes
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes = minutes % 60;
+        }
+     // Handle negative minutes
+        if (minutes < 0) {
+            // Borrow hours to make minutes positive
+            int borrow = (Math.abs(minutes) + 59) / 60; // number of hours to borrow
+            hours -= borrow;
+            minutes += borrow * 60;
+        }
+
+        // If hours goes negative, keep as is (could also clamp to 0 if desired)
+    }
+    // Add two time objects
+    public Time add(Time t) {
+        return new Time(this.hours + t.hours, this.minutes + t.minutes);
+    }
+
+    // Subtract t from current time
+    public Time subtract(Time t) {
+        return new Time(this.hours - t.hours, this.minutes - t.minutes);
+    }
+
+    @Override
+    public String toString() {
+        return hours + "h " + minutes + "m";
+    }
+}
+public class TimeDemo1 {
+    public static void main(String[] args) {
+        Time t1 = new Time(2, 75);      // Normalized to 3h 15m
+        Time t2 = new Time(1, 50);
+
+        System.out.println("t1: " + t1);  // 3h 15m
+        System.out.println("t2: " + t2);  // 1h 50m
+
+        Time sum = t1.add(t2);
+        Time diff = t1.subtract(t2);
+
+        System.out.println("Sum: " + sum);       // 5h 5m
+        System.out.println("Difference: " + diff); // 1h 25m
+    }
+}
