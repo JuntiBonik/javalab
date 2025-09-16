@@ -1,0 +1,26 @@
+package javalab;
+		import java.util.HashMap;
+		import java.util.Map;
+
+		public class FibonacciMemo {
+		    public static void main(String[] args) {
+		        int n = 10;
+		        Map<Integer, Long> memo = new HashMap<>();
+		        System.out.println("fib(" + n + ") = " + fib(n, memo));
+		    }
+
+		    // Recursive Fibonacci with memoization
+		    public static long fib(int n, Map<Integer, Long> memo) {
+		        // Base cases
+		        if (n <= 1) return n;
+
+		        // Check if result is already computed
+		        if (memo.containsKey(n)) return memo.get(n);
+
+		        // Compute and store in memo
+		        long value = fib(n - 1, memo) + fib(n - 2, memo);
+		        memo.put(n, value);
+		        return value;
+		    }
+		    
+	}
