@@ -1,0 +1,60 @@
+package javalab;
+
+class BankAccount {
+    private String accountHolder;
+    private double balance;
+
+    // Constructor
+    public BankAccount(String accountHolder, double initialBalance) {
+        this.accountHolder = accountHolder;
+        this.balance = initialBalance;
+    }
+
+    // Deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+        } else {
+            System.out.println("❗ Deposit amount must be positive.");
+        }
+    }
+
+    // Withdraw money with overdraft protection
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("❗ Withdrawal amount must be positive.");
+        } else if (amount > balance) {
+            System.out.println(" Transaction failed: Insufficient funds.");
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        }
+    }
+
+    // Get current balance
+    public double getBalance() {
+        return balance;
+    }
+}
+
+public class BankDemo {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("Alice", 5000.0);
+
+        System.out.println("Initial Balance: " + account.getBalance());
+
+        // Successful deposit
+        account.deposit(1500);
+        System.out.println("Balance after deposit: " + account.getBalance());
+
+        // Successful withdrawal
+        account.withdraw(2000);
+        System.out.println("Balance after withdrawal: " + account.getBalance());
+
+        // Failed withdrawal (overdraft protection)
+        account.withdraw(6000);
+        System.out.println("Balance after failed withdrawal: " + account.getBalance());
+    }
+}
+
