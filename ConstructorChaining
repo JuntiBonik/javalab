@@ -1,0 +1,32 @@
+package javalab;
+
+//Parent class
+class person {
+ person() {
+     System.out.println("Person constructor called");
+ }
+}
+
+//Child of Person
+class Employee extends person {
+ Employee() {
+     super(); // Calls Person constructor
+     System.out.println("Employee constructor called");
+ }
+}
+
+//Child of Employee
+class Manager extends Employee {
+ Manager() {
+     super(); // Calls Employee constructor (which also calls Person)
+     System.out.println("Manager constructor called");
+ }
+}
+
+public class ConstructorChainingDemo {
+ public static void main(String[] args) {
+     // Creating a Manager object triggers constructor chaining
+     Manager m = new Manager();
+ }
+}
+
