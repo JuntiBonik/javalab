@@ -1,0 +1,32 @@
+package javalab;
+		import java.util.HashMap;
+		import java.util.Map;
+
+		public class WordFrequency {
+		    public static void main(String[] args) {
+		        String sentence = "The cat and the dog.";
+
+		        Map<String, Integer> freq = countWordFrequency(sentence);
+
+		        // Print the word frequencies
+		        for (Map.Entry<String, Integer> entry : freq.entrySet()) {
+		            System.out.println(entry.getKey() + ": " + entry.getValue());
+		        }
+		    }
+
+		    public static Map<String, Integer> countWordFrequency(String text) {
+		        // Convert to lowercase and remove punctuation
+		        text = text.toLowerCase().replaceAll("[^a-z\\s]", "");
+
+		        String[] words = text.split("\\s+"); // Split on whitespace
+		        Map<String, Integer> map = new HashMap<>();
+
+		        for (String word : words) {
+		            if (word.isEmpty()) continue;
+		            map.put(word, map.getOrDefault(word, 0) + 1);
+		        }
+
+		        return map;
+		    }
+		
+	}
