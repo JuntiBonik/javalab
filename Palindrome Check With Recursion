@@ -1,0 +1,27 @@
+package javalab;
+
+public class RecursivePalindrome {
+    public static void main(String[] args) {
+        String str = "Able was I ere I saw Elba";
+        System.out.println(isPalindrome(str)); // Output: true
+    }
+
+    public static boolean isPalindrome(String s) {
+        // Clean the string: remove all non-letters and convert to lowercase
+        s = s.replaceAll("[^a-zA-Z]", "").toLowerCase();
+
+        // Call the recursive helper
+        return checkPalindrome(s, 0, s.length() - 1);
+    }
+
+    private static boolean checkPalindrome(String s, int left, int right) {
+        // Base case: pointers have crossed or are equal
+        if (left >= right) return true;
+
+        // If mismatch found, not a palindrome
+        if (s.charAt(left) != s.charAt(right)) return false;
+
+        // Recurse inward
+        return checkPalindrome(s, left + 1, right - 1);
+    }
+}
